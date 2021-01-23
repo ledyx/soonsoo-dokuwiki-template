@@ -1,0 +1,71 @@
+html {
+    overflow-x: auto;
+    overflow-y: scroll;
+}
+html,
+body {
+    margin: 0;
+    padding: 0;
+    /* default font size: 100% => 16px; 93.75% => 15px; 87.5% => 14px; 81.25% => 13px; 75% => 12px */
+    -webkit-text-size-adjust: 100%;
+}
+
+body * {
+    /* font: normal 87.5%/1.4 'Nanum Gothic'; */
+    font-family: 'Nanum Gothic';
+}
+
+p {
+    margin: 1rem 0 1rem 0 !important;
+}
+
+.breadcrumbs .trace {
+    background-color: #f1f1f1;
+    width: 100%;
+}
+
+.ui-admin h5 {
+    font-weight: bold;
+}
+
+.ui-admin p:first-child {
+    margin-bottom: 1rem;
+}
+
+.ui-admin ul {
+    margin-bottom: 1rem;
+}
+
+#admin__version {
+    margin: 1rem 0 1rem 0;
+    text-align: right;
+    font-size: small;
+    font-weight: bold;
+}
+
+#tool__bar {
+    margin: 1rem 0 1rem 0;
+}
+
+textarea {
+    width: 100%;
+    min-height: 30rem;
+}
+
+.editbutton_section {
+    text-align: right;
+}
+
+legend {
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 1rem !important;
+}
+
+#dw__profiledelete {
+    margin: 2rem 0 2rem 0;
+}
+
+#mediamanager__page * {
+    line-height: 1.5rem;
+}
