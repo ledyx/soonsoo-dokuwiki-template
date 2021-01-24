@@ -22,16 +22,17 @@ if (!defined('DOKU_INC')) die();
             ?>
         </a>
 
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
         </a>
     </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
+    <div id="navbarBasic" class="navbar-menu">
+
         <div class="navbar-start">
-            <div class="navbar-item">
+            <div class="navbar-item is-expanded">
                 <?php tpl_searchform(); ?>
             </div>
         </div>
@@ -39,7 +40,7 @@ if (!defined('DOKU_INC')) die();
         <div class="navbar-end">
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
-                    <h3><?php echo $lang['site_tools']; ?></h3>
+                    <?php echo $lang['site_tools']; ?>
                 </a>
 
                 <div class="navbar-dropdown">
@@ -95,4 +96,3 @@ if (!defined('DOKU_INC')) die();
         </div>
     </div>
 </nav>
-

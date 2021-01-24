@@ -1,29 +1,78 @@
 /* DOKUWIKI:include assets/js/all.min.js */
 /* DOKUWIKI:include conf/test.js */
 
+function _optional(value, then) {
+    if (value != null) {
+        if (then) {
+            then(value);
+        }
+    }
+}
+
+function _optionalWithIterable(dom, then) {
+    _optional(dom, values => {
+        for (let i = 0; i < values.length; i++) {
+            then(values[i], i);
+        }
+    });
+}
+
+function _optionalWithTagNameIterable(dom, tagName, then) {
+    _optional(dom.getElementsByTagName(tagName), values => {
+        for (let i = 0; i < values.length; i++) {
+            then(values[i], i);
+        }
+    });
+}
+
+function toggleMobileMenu(id, isShow) {
+    const classList = document.getElementById(id).classList;
+
+    const hasHidden = document.getElementById(id).classList.contains('is-hidden');
+
+    if (isShow) {
+        if (hasHidden) {
+            classList.remove("is-hidden");
+        }
+    }
+    else {
+        if (!hasHidden) {
+            classList.add("is-hidden");
+        }
+    }
+
+    const htmlStyle = document.getElementsByTagName('html')[0].style;
+    htmlStyle.overflowX = isShow ? "hidden" : "auto";
+    htmlStyle.overflowY = isShow ? "hidden" : "auto";
+}
+
 function styleCommons() {
     const wikiContent = document.getElementById("wiki-content");
-    const inputs = wikiContent.getElementsByTagName("input");
-    if (inputs) {
-        for (let i = 0; i < inputs.length; i++) {
-            inputs[i].classList.add('input');
-        }
-    }
+    if (!wikiContent)
+        return;
 
-    const buttons = wikiContent.getElementsByTagName("button");
-    if (buttons) {
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].classList.add('button');
-        }
-    }
+    _optionalWithTagNameIterable(wikiContent, 'input',
+        (input, _index) => {
+            const inputClass = input.type.toLowerCase() == 'checkbox' ? 'checkbox' : 'input';
+            input.classList.add(inputClass);
+        });
 
-    const labels = wikiContent.getElementsByTagName("label");
-    if (labels) {
-        for (let i = 0; i < labels.length; i++) {
-            // labels[i].classList.remove('block');
-            labels[i].classList.add('label');
-        }
-    }
+    _optionalWithTagNameIterable(wikiContent, 'button',
+        (button, _index) => {
+            button.classList.add('button');
+        });
+
+
+    _optionalWithTagNameIterable(wikiContent, 'button',
+        (button, _index) => {
+            button.classList.add('button');
+        });
+
+
+    _optionalWithTagNameIterable(wikiContent, 'label',
+        (label, _index) => {
+            label.classList.add('label');
+        });
 }
 
 function styleSearchForm() {
@@ -47,42 +96,43 @@ function styleEditor() {
 
     editorButtons.classList.add("buttons");
     editorButtons.classList.add("is-right");
-    
-    if (editorButtons) {
-        for (let i = 0; i < editorButtons.children.length; i++) {
-            const button = editorButtons.children[i];
-            button.classList.add("button");
 
+    _optionalWithIterable(editorButtons.children,
+        button => {
+            button.classList.add("button");
             if (button.id == 'edbtn__save') {
                 button.classList.add('is-info');
             }
-        }
-    }
+        });
 }
 
 function styleReader() {
-    const buttonForms = document.getElementsByClassName('btn_secedit');
-    if (!buttonForms)
-        return;
+    _optionalWithIterable(document.getElementsByClassName('btn_secedit'),
+        (buttonForm, _index) => {
+            buttonForm.classList.remove('button');
 
-    for (let i = 0; i < buttonForms.length; i++) {
-        const buttonForm = buttonForms[i];
-        buttonForm.classList.remove('button');
-
-        const editButton = buttonForm.querySelector('button');
-        editButton.classList.add('button');
-        editButton.classList.add('is-small');
-    }
+            const editButton = buttonForm.querySelector('button');
+            editButton.classList.add('button');
+            editButton.classList.add('is-small');
+        });
 }
 
 function styleConfigForm() {
-    const configForm = document.getElementById("dw__configform");
+    /* const configForm = document.getElementById("dw__configform");
     if (configForm) {
         const configFormButtons = configForm.getElementsByTagName('p')[0];
         configFormButtons.classList.add('buttons');
         configFormButtons.classList.add('is-right');
-    }
+    } */
 }
+
+window.addEventListener("resize", () => {
+    const isBreakAtMobile = window.innerWidth <= 767;
+    if (isBreakAtMobile) {
+        toggleTOC(false);
+    }
+});
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -113,4 +163,16 @@ document.addEventListener('DOMContentLoaded', () => {
     styleEditor();
     styleReader();
     styleConfigForm();
+
+
+    _optionalWithIterable(document.getElementsByClassName("mobile-menu"),
+        mobileMenu => {
+            _optionalWithIterable(mobileMenu.getElementsByTagName('a'),
+                anchor => {
+                    anchor.addEventListener('click', _ => {
+                        toggleMobileMenu('mobile-toc', false);
+                        toggleMobileMenu('mobile-sidebar', false);
+                    });
+                });
+        });
 });
