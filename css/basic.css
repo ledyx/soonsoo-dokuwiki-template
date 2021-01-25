@@ -116,3 +116,61 @@ legend {
 .mobile-menu-close {
     position: fixed;
 }
+
+#extension__list h2 {
+    font-size: 1rem !important;
+}
+
+#mediamanager__page h1 {
+    font-size: 1.5rem !important;
+    margin: 20px 0 20px 0;
+}
+
+#mediamanager__page h2 {
+    font-size: 1.25rem !important;
+    margin: 15px 0 15px 0;
+}
+
+#mediamanager__page h3 {
+    font-size: 1rem !important;
+    margin: 10px 0 10px 0;
+}
+
+#mediamanager__page .panel {
+    padding: 10px 15px 10px 15px;
+}
+
+.tabs li {
+    border: 1px solid #f5f5f5;
+    margin: 0 1px 0 1px;
+    width: 33.33%;
+    text-align: center;
+}
+
+.ui-controlgroup {
+    margin: 10px;
+}
+
+.ui-controlgroup * {
+    font-size: 0.75rem;
+}
+
+.qq-upload-button {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 1rem 0 1rem 0;
+}
+
+.qq-upload-list {
+    margin-bottom: 20px;
+}
+
+#media__manager {
+    margin: 0 10px 0 10px;
+}
+
+#media__manager h1 {
+    font-size: 1.5rem !important;
+    margin: 0.5rem 0 0.5rem 0;
+}

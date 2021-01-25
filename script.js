@@ -9,6 +9,15 @@ function _optional(value, then) {
     }
 }
 
+function _optionalIdElement(id, then) {
+    const dom = document.getElementById(id);
+    if (dom != null) {
+        if (then) {
+            then(dom);
+        }
+    }
+}
+
 function _optionalWithIterable(dom, then) {
     _optional(dom, values => {
         for (let i = 0; i < values.length; i++) {
@@ -18,17 +27,20 @@ function _optionalWithIterable(dom, then) {
 }
 
 function _optionalWithTagNameIterable(dom, tagName, then) {
-    _optional(dom.getElementsByTagName(tagName), values => {
-        for (let i = 0; i < values.length; i++) {
-            then(values[i], i);
-        }
-    });
+    _optionalWithIterable(dom.getElementsByTagName(tagName), then);
+}
+
+function _optionalWithClassNameIterable(dom, className, then) {
+    _optionalWithIterable(dom.getElementsByClassName(className), then);
+}
+
+function _optionalWithQuerySelectorAll(dom, selector, then) {
+    _optionalWithIterable(dom.querySelectorAll(selector), then);
 }
 
 function toggleMobileMenu(id, isShow) {
     const classList = document.getElementById(id).classList;
-
-    const hasHidden = document.getElementById(id).classList.contains('is-hidden');
+    const hasHidden = classList.contains('is-hidden');
 
     if (isShow) {
         if (hasHidden) {
@@ -46,30 +58,26 @@ function toggleMobileMenu(id, isShow) {
     htmlStyle.overflowY = isShow ? "hidden" : "auto";
 }
 
-function styleCommons() {
-    const wikiContent = document.getElementById("wiki-content");
-    if (!wikiContent)
-        return;
-
-    _optionalWithTagNameIterable(wikiContent, 'input',
+function styleCommons(dom) {
+    _optionalWithTagNameIterable(dom, 'input',
         (input, _index) => {
             const inputClass = input.type.toLowerCase() == 'checkbox' ? 'checkbox' : 'input';
             input.classList.add(inputClass);
         });
 
-    _optionalWithTagNameIterable(wikiContent, 'button',
+    _optionalWithTagNameIterable(dom, 'button',
         (button, _index) => {
             button.classList.add('button');
         });
 
 
-    _optionalWithTagNameIterable(wikiContent, 'button',
+    _optionalWithTagNameIterable(dom, 'button',
         (button, _index) => {
             button.classList.add('button');
         });
 
 
-    _optionalWithTagNameIterable(wikiContent, 'label',
+    _optionalWithTagNameIterable(dom, 'label',
         (label, _index) => {
             label.classList.add('label');
         });
@@ -89,15 +97,11 @@ function styleSearchForm() {
     searchButton.innerHTML = '<i class="fas fa-search"></i>';
 }
 
-function styleEditor() {
-    const editorButtons = document.getElementsByClassName("editButtons")[0];
-    if (!editorButtons)
-        return;
+function styleEditor(editButtons) {
+    editButtons.classList.add("buttons");
+    editButtons.classList.add("is-right");
 
-    editorButtons.classList.add("buttons");
-    editorButtons.classList.add("is-right");
-
-    _optionalWithIterable(editorButtons.children,
+    _optionalWithIterable(editButtons.children,
         button => {
             button.classList.add("button");
             if (button.id == 'edbtn__save') {
@@ -107,7 +111,7 @@ function styleEditor() {
 }
 
 function styleReader() {
-    _optionalWithIterable(document.getElementsByClassName('btn_secedit'),
+    _optionalWithClassNameIterable(document, 'btn_secedit',
         (buttonForm, _index) => {
             buttonForm.classList.remove('button');
 
@@ -118,12 +122,41 @@ function styleReader() {
 }
 
 function styleConfigForm() {
-    /* const configForm = document.getElementById("dw__configform");
-    if (configForm) {
-        const configFormButtons = configForm.getElementsByTagName('p')[0];
-        configFormButtons.classList.add('buttons');
-        configFormButtons.classList.add('is-right');
-    } */
+    _optionalIdElement("dw__configform",
+        dw__configform => {
+            const selectWrappers = dw__configform.querySelectorAll("div.input");
+            for (let selectWrapper of selectWrappers) {
+
+                selectWrapper.classList.remove('input');
+
+                if (selectWrapper.getElementsByTagName('select')[0]) {
+                    selectWrapper.classList.add('select');
+                    selectWrapper.classList.add('is-fullwidth');
+                }
+            }
+
+            _optionalWithTagNameIterable(dw__configform, "textarea",
+                (textarea, _index) => textarea.classList.add('textarea'));
+
+            _optionalWithClassNameIterable(dw__configform, "selection",
+                selection => selection.classList.remove('selectiondefault'));
+
+            _optionalWithQuerySelectorAll(dw__configform, "td.label",
+                (td, _index) => td.className = '');
+        });
+}
+
+function setMobileStyle() {
+    _optionalWithIterable(document.getElementsByClassName("mobile-menu"),
+        mobileMenu => {
+            _optionalWithIterable(mobileMenu.getElementsByTagName('a'),
+                anchor => {
+                    anchor.addEventListener('click', _ => {
+                        toggleMobileMenu('mobile-toc', false);
+                        toggleMobileMenu('mobile-sidebar', false);
+                    });
+                });
+        });
 }
 
 window.addEventListener("resize", () => {
@@ -158,21 +191,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    styleCommons();
+    _optionalIdElement("wiki-content",
+        wikiContent => styleCommons(wikiContent));
+
     styleSearchForm();
-    styleEditor();
+    _optional(document.getElementsByClassName("editButtons")[0],
+        editButtons => styleEditor(editButtons));
     styleReader();
     styleConfigForm();
-
-
-    _optionalWithIterable(document.getElementsByClassName("mobile-menu"),
-        mobileMenu => {
-            _optionalWithIterable(mobileMenu.getElementsByTagName('a'),
-                anchor => {
-                    anchor.addEventListener('click', _ => {
-                        toggleMobileMenu('mobile-toc', false);
-                        toggleMobileMenu('mobile-sidebar', false);
-                    });
-                });
-        });
+    setMobileStyle();
 });

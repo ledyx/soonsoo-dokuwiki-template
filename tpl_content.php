@@ -7,8 +7,7 @@ tpl_toc();
 $toc_buffer = ob_get_clean();
 ?>
 
-<div class="section">
-
+<div>
     <!-- BREADCRUMBS -->
     <?php if ($conf['breadcrumbs'] || $conf['youarehere']) : ?>
         <div class="breadcrumbs">
@@ -34,7 +33,7 @@ $toc_buffer = ob_get_clean();
             <a class="button is-small" href="<?php echo wl('sidebar') . '&do=edit' ?>">Edit Sidebar</a>
         <?php endif; ?>
 
-        <div class="column is-full-mobile
+        <div id="wiki-content" class="column is-full-mobile
         <?php if (strlen($toc_buffer) > 0) : ?>
             is-three-quarters-tablet is-two-thirds-desktop
         <?php else : ?>
@@ -105,7 +104,9 @@ $toc_buffer = ob_get_clean();
         if (strlen($toc_buffer) > 0) :
         ?>
             <div class="column is-hidden-mobile">
-                <?php tpl_toc(); ?>
+                <div>
+                    <?php tpl_toc(); ?>
+                </div>
             </div>
         <?php endif; ?>
 
