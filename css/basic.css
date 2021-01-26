@@ -1,6 +1,6 @@
 html {
-    overflow-x: auto;
-    overflow-y: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 html,
 body {
@@ -173,4 +173,29 @@ legend {
 #media__manager h1 {
     font-size: 1.5rem !important;
     margin: 0.5rem 0 0.5rem 0;
+}
+
+#acl_manager h1, #acl_manager h2 {
+    margin: 2rem 0 1rem 0;
+}
+
+:target::before {
+    content: "";
+    display: block;
+    height: 3rem; /* fixed header height*/
+    margin: -3rem 0 0; /* negative fixed header height */
+}
+
+.tags {
+    margin: 15px 0 15px 0;
+    text-align: right;
+}
+  
+.tags a {
+    background-color: #FFEB3B;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 0.7rem;
+    line-height: 2rem;
+    white-space:nowrap;
 }

@@ -26,16 +26,11 @@ if (!defined('DOKU_INC')) die(); /* must be run from within DokuWiki */
     <link href="<?php echo tpl_basedir(); ?>assets/css/bulma.min.css" rel="stylesheet">
     <?php tpl_metaheaders() ?>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <?php // echo tpl_favicon(array('favicon', 'mobile')) 
-    ?>
-    <?php // tpl_includeFile('meta.html') 
-    ?>
 </head>
 
 <body>
     <?php include('tpl_header.php') ?>
     <?php include_once('tpl_content.php') ?>
-    <?php include('tpl_footer.php') ?>
 
     <div class="no"><?php tpl_indexerWebBug() /* provide DokuWiki housekeeping, required in all templates */ ?></div>
     <div id="screen__mode" class="no"></div><?php /* helper to detect CSS media query in script.js */ ?>

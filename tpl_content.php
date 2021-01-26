@@ -10,15 +10,15 @@ $toc_buffer = ob_get_clean();
 <div>
     <!-- BREADCRUMBS -->
     <?php if ($conf['breadcrumbs'] || $conf['youarehere']) : ?>
-        <div class="breadcrumbs">
-            <?php if ($conf['youarehere']) : ?>
-                <div class="youarehere"><?php tpl_youarehere() ?></div>
-            <?php endif ?>
-            <?php if ($conf['breadcrumbs']) : ?>
-                <div class="trace"><?php tpl_breadcrumbs() ?></div>
-            <?php endif ?>
-        </div>
-    <?php endif ?>
+            <div class="breadcrumbs">
+                <?php if ($conf['youarehere']) : ?>
+                    <div class="youarehere"><?php tpl_youarehere() ?></div>
+                <?php endif ?>
+                <?php if ($conf['breadcrumbs']) : ?>
+                    <div class="trace"><?php tpl_breadcrumbs() ?></div>
+                <?php endif ?>
+            </div>
+        <?php endif ?>
 
     <div class="columns is-mobile">
         <?php if ($hasSidebar) : ?>
@@ -27,7 +27,9 @@ $toc_buffer = ob_get_clean();
                 <?php else : ?>
                     is-hidden-mobile
                 <?php endif; ?>">
-                <?php include('tpl_sidebar.php') ?>
+                <div class="sidebar">
+                    <?php include('tpl_sidebar.php') ?>
+                </div>
             </div>
         <?php else : ?>
             <a class="button is-small" href="<?php echo wl('sidebar') . '&do=edit' ?>">Edit Sidebar</a>
@@ -84,20 +86,17 @@ $toc_buffer = ob_get_clean();
 
             <div>
                 <?php tpl_flush() ?>
-                <?php tpl_includeFile('pageheader.html') ?>
 
                 <div>
                     <!-- wikipage start -->
                     <?php tpl_content(false) ?>
                     <!-- wikipage stop -->
                 </div>
-
-                <?php tpl_includeFile('pagefooter.html') ?>
             </div>
 
             <div class="docInfo"><?php tpl_pageinfo() ?></div>
-
             <?php tpl_flush() ?>
+            <?php include('tpl_footer.php') ?>
         </div>
 
         <?php

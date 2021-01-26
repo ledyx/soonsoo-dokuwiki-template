@@ -25,6 +25,3 @@ if (!defined('DOKU_INC')) die();
         <a href="https://dokuwiki.org/" title="Driven by DokuWiki" <?php echo $target ?>><img src="<?php echo tpl_basedir(); ?>images/button-dw.png" width="80" height="15" alt="Driven by DokuWiki" /></a>
     </div>
 </footer><!-- /footer -->
-
-<?php
-tpl_includeFile('footer.html');
