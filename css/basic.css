@@ -141,7 +141,7 @@ legend {
 }
 
 .tabs li {
-    border: 1px solid #f5f5f5;
+    border: 1px solid #f1f1f1;
     margin: 0 1px 0 1px;
     width: 33.33%;
     text-align: center;
@@ -198,4 +198,55 @@ legend {
     font-size: 0.7rem;
     line-height: 2rem;
     white-space:nowrap;
+}
+
+.hiddenHead {
+    background-color: transparent !important;
+    display: block;
+}
+
+.hiddenHead p::after {
+    content: none !important;
+}
+
+.hiddenGlobal {
+    border: 0 !important;
+}
+
+.hiddenBody {
+    margin-bottom: 20px;
+}
+
+.sidebar .toggle, #mobile-sidebar .toggle {
+    visibility: collapse !important;
+    font-size: 0 !important;
+}
+
+.sidebar .content, #mobile-sidebar .content {
+    margin-top: 1.25rem;
+}
+
+.sidebar ul {
+    margin: 0 0 0 0.5rem;
+}
+
+.mobile-menu ul {
+    margin: 0;
+}
+
+.sidebar li, #mobile-sidebar li {
+    list-style: none;
+}
+
+.sidebar h1, #mobile-sidebar h1 {
+    font-size: 1.25rem !important;
+}
+
+.sidebar .wikilink1, #mobile-sidebar .wikilink1 {
+    font-size: 0.8rem;
+}
+
+.menu-container {
+    border-left: 1px solid #f1f1f1;
+    border-right: 1px solid #f1f1f1;
 }

@@ -1,11 +1,11 @@
 <?php
 
 /**
- * DokuWiki Default Template 2012
+ * Soonsoo DokuWiki Template 2021
  *
  * @link     https://github.com/ledyx/soonsoo-dokuwiki-template
- * @author   Joohyuk Lee <clarencedglee@gmail.com>
- * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ * @author   Joohyuk Lee <zledyx@gmail.com>
+ * @license  MIT (https://opensource.org/licenses/MIT)
  */
 
 if (!defined('DOKU_INC')) die(); /* must be run from within DokuWiki */

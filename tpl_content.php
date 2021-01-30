@@ -8,21 +8,9 @@ $toc_buffer = ob_get_clean();
 ?>
 
 <div>
-    <!-- BREADCRUMBS -->
-    <?php if ($conf['breadcrumbs'] || $conf['youarehere']) : ?>
-            <div class="breadcrumbs">
-                <?php if ($conf['youarehere']) : ?>
-                    <div class="youarehere"><?php tpl_youarehere() ?></div>
-                <?php endif ?>
-                <?php if ($conf['breadcrumbs']) : ?>
-                    <div class="trace"><?php tpl_breadcrumbs() ?></div>
-                <?php endif ?>
-            </div>
-        <?php endif ?>
-
-    <div class="columns is-mobile">
+    <div class="columns is-mobile mt-1">
         <?php if ($hasSidebar) : ?>
-            <div class="column <?php if (strlen($toc_buffer) > 0) : ?>
+            <div class="column mx-3 menu-container <?php if (strlen($toc_buffer) > 0) : ?>
                     is-hidden-touch
                 <?php else : ?>
                     is-hidden-mobile
@@ -41,7 +29,20 @@ $toc_buffer = ob_get_clean();
         <?php else : ?>
             is-three-quarters-tablet is-four-fifths-desktop
         <?php endif; ?>">
-            <div class="buttons is-right is-hidden-mobile">
+
+            <!-- BREADCRUMBS -->
+            <?php if ($conf['breadcrumbs'] || $conf['youarehere']) : ?>
+                <div class="breadcrumbs">
+                    <?php if ($conf['youarehere']) : ?>
+                        <div class="youarehere"><?php tpl_youarehere() ?></div>
+                    <?php endif ?>
+                    <?php if ($conf['breadcrumbs']) : ?>
+                        <div class="trace"><?php tpl_breadcrumbs() ?></div>
+                    <?php endif ?>
+                </div>
+            <?php endif ?>
+
+            <div class="buttons is-right mt-3 is-hidden-mobile">
                 <?php
                 $page_menus = (new \dokuwiki\Menu\PageMenu())->getItems();
                 foreach ($page_menus as $page_menu) {
@@ -87,7 +88,7 @@ $toc_buffer = ob_get_clean();
             <div>
                 <?php tpl_flush() ?>
 
-                <div>
+                <div class="mx-1">
                     <!-- wikipage start -->
                     <?php tpl_content(false) ?>
                     <!-- wikipage stop -->
@@ -102,7 +103,7 @@ $toc_buffer = ob_get_clean();
         <?php
         if (strlen($toc_buffer) > 0) :
         ?>
-            <div class="column is-hidden-mobile">
+            <div class="column is-hidden-mobile menu-container">
                 <div>
                     <?php tpl_toc(); ?>
                 </div>
