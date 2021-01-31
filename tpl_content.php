@@ -7,10 +7,10 @@ tpl_toc();
 $toc_buffer = ob_get_clean();
 ?>
 
-<div>
+<div class="content-start mt-1">
     <div class="columns is-mobile mt-1">
         <?php if ($hasSidebar) : ?>
-            <div class="column mx-3 menu-container <?php if (strlen($toc_buffer) > 0) : ?>
+            <div class="column mx-3 scrollable scrollable-desktop menu-container <?php if (strlen($toc_buffer) > 0) : ?>
                     is-hidden-touch
                 <?php else : ?>
                     is-hidden-mobile
@@ -23,7 +23,7 @@ $toc_buffer = ob_get_clean();
             <a class="button is-small" href="<?php echo wl('sidebar') . '&do=edit' ?>">Edit Sidebar</a>
         <?php endif; ?>
 
-        <div id="wiki-content" class="column is-full-mobile
+        <div id="wiki-content" class="column scrollable scrollable-desktop is-full-mobile
         <?php if (strlen($toc_buffer) > 0) : ?>
             is-three-quarters-tablet is-two-thirds-desktop
         <?php else : ?>
@@ -42,24 +42,13 @@ $toc_buffer = ob_get_clean();
                 </div>
             <?php endif ?>
 
-            <div class="buttons is-right mt-3 is-hidden-mobile">
-                <?php
-                $page_menus = (new \dokuwiki\Menu\PageMenu())->getItems();
-                foreach ($page_menus as $page_menu) {
-                    echo '<a class="button is-white is-small" href="' . $page_menu->getLink() . '">'
-                        . '<i class="mr-2">' . inlineSVG($page_menu->getSvg()) . '</i></a>';
-                }
-                ?>
-            </div>
-
-            <div class="columns is-vcentered is-mobile is-hidden-tablet">
-                <div class="column is-2 has-text-left">
+            <div class="columns is-vcentered is-mobile mt-1">
+                <div class="column is-2 has-text-left is-hidden-desktop">
                     <?php if ($hasSidebar) : ?>
                         <button class="button" onclick="toggleMobileMenu('mobile-sidebar', true)">
                             <i class="fas fa-sitemap"></i>
                         </button>
                     <?php endif; ?>
-
                 </div>
                 <div class="column">
                     <div class="buttons is-centered">
@@ -72,7 +61,7 @@ $toc_buffer = ob_get_clean();
                         ?>
                     </div>
                 </div>
-                <div class="column is-2 has-text-right">
+                <div class="column is-2 has-text-right is-hidden-tablet">
                     <?php
                     if (strlen($toc_buffer) > 0) :
                     ?>
@@ -103,7 +92,7 @@ $toc_buffer = ob_get_clean();
         <?php
         if (strlen($toc_buffer) > 0) :
         ?>
-            <div class="column is-hidden-mobile menu-container">
+            <div class="column is-hidden-mobile scrollable scrollable-desktop menu-container">
                 <div>
                     <?php tpl_toc(); ?>
                 </div>
@@ -122,7 +111,7 @@ $toc_buffer = ob_get_clean();
         </button>
     </div>
 
-    <div class="mt-6 has-text-centered">
+    <div class="mt-6 scrollable scrollable-mobile has-text-centered">
         <?php include('tpl_sidebar.php') ?>
     </div>
 </div>
@@ -134,7 +123,7 @@ $toc_buffer = ob_get_clean();
         </button>
     </div>
 
-    <div class="mt-6 has-text-centered">
+    <div class="mt-6 scrollable scrollable-mobile has-text-centered">
         <?php tpl_toc(); ?>
     </div>
 </div>

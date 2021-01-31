@@ -1,0 +1,29 @@
+.tags {
+    margin: 15px 0 15px 0;
+}
+  
+.tags a {
+    background-color: #FFEB3B;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 0.7rem;
+    line-height: 2rem;
+    white-space:nowrap;
+}
+
+.hiddenHead {
+    background-color: transparent !important;
+    display: block;
+}
+
+.hiddenHead p::after {
+    content: none !important;
+}
+
+.hiddenGlobal {
+    border: 0 !important;
+}
+
+.hiddenBody {
+    margin-bottom: 20px;
+}

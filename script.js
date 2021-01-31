@@ -52,10 +52,6 @@ function toggleMobileMenu(id, isShow) {
             classList.add("is-hidden");
         }
     }
-
-    const htmlStyle = document.getElementsByTagName('html')[0].style;
-    htmlStyle.overflowX = isShow ? "hidden" : "auto";
-    htmlStyle.overflowY = isShow ? "hidden" : "auto";
 }
 
 function styleCommons(dom) {
@@ -80,6 +76,17 @@ function styleCommons(dom) {
     _optionalWithTagNameIterable(dom, 'label',
         (label, _index) => {
             label.classList.add('label');
+        });
+
+
+    _optionalWithClassNameIterable(dom, 'level2',
+        (label, _index) => {
+            label.classList.add('content');
+        });
+
+    _optionalWithClassNameIterable(dom, 'level3',
+        (label, _index) => {
+            label.classList.add('content');
         });
 }
 

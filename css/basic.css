@@ -1,6 +1,6 @@
 html {
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 html,
 body {
@@ -33,14 +33,17 @@ h3 {
 
 h4 {
     font-size: 1.75rem !important;
+    margin-top: 2rem !important;
 }
 
 h5 {
     font-size: 1.5rem !important;
+    margin-top: 2rem !important;
 }
 
 h6 {
     font-size: 1.25rem !important;
+    margin-top: 2rem !important;
 }
 
 .breadcrumbs .trace {
@@ -102,6 +105,26 @@ legend {
     visibility: collapse;
 }
 
+.scrollable::-webkit-scrollbar {
+    width: 7px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+    border-radius: 10px;
+}
+.scrollable::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+
+.scrollable-desktop {
+    max-height: calc(100vh - 4rem);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 .mobile-menu {
     position: fixed;
     top: 0;
@@ -110,6 +133,11 @@ legend {
     z-index: 999;
     width: 100%;
     height: 100%;
+}
+
+.scrollable-mobile {
+    max-height: calc(100vh - 7rem);
+    overflow-x: hidden;
     overflow-y: auto !important;
 }
 
@@ -186,37 +214,6 @@ legend {
     margin: -3rem 0 0; /* negative fixed header height */
 }
 
-.tags {
-    margin: 15px 0 15px 0;
-    text-align: right;
-}
-  
-.tags a {
-    background-color: #FFEB3B;
-    border-radius: 10px;
-    padding: 5px;
-    font-size: 0.7rem;
-    line-height: 2rem;
-    white-space:nowrap;
-}
-
-.hiddenHead {
-    background-color: transparent !important;
-    display: block;
-}
-
-.hiddenHead p::after {
-    content: none !important;
-}
-
-.hiddenGlobal {
-    border: 0 !important;
-}
-
-.hiddenBody {
-    margin-bottom: 20px;
-}
-
 .sidebar .toggle, #mobile-sidebar .toggle {
     visibility: collapse !important;
     font-size: 0 !important;
@@ -246,7 +243,16 @@ legend {
     font-size: 0.8rem;
 }
 
+.sidebar .wikilink2, #mobile-sidebar .wikilink2 {
+    font-size: 0.7rem;
+}
+
+.content-start {
+    border-top: 1px solid #f1f1f1
+}
+
 .menu-container {
     border-left: 1px solid #f1f1f1;
     border-right: 1px solid #f1f1f1;
 }
+
