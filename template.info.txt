@@ -1,0 +1,7 @@
+base     soonsoo
+author   Ledyx
+email    zledyx@gmail.com
+date     2021-02-02
+name    Soonsoo Template
+desc     Soonsoo(순수, 純粹) means "Purity" in Korean. Fully responsive template.
+url       http://www.dokuwiki.org/template:soonsoo
