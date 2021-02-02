@@ -1,15 +1,20 @@
+/* tag */
+
 .tags {
     margin: 15px 0 15px 0;
 }
   
 .tags a {
-    background-color: #FFEB3B;
-    border-radius: 10px;
-    padding: 5px;
+    background-color: #00d1b2;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 7px 5px 7px;
     font-size: 0.7rem;
-    line-height: 2rem;
     white-space:nowrap;
+    margin: 0 1px 0 1px;
 }
+
+/* hidden */
 
 .hiddenHead {
     background-color: transparent !important;
@@ -26,4 +31,39 @@
 
 .hiddenBody {
     margin-bottom: 20px;
+}
+
+/* changes & indexMenu */
+
+.sidebar .toggle {
+    visibility: collapse !important;
+    font-size: 0 !important;
+}
+
+.sidebar .content {
+    margin-top: 1.25rem;
+}
+
+.sidebar li {
+    list-style: none;
+}
+
+.sidebar h1 {
+    font-size: 1.25rem !important;
+}
+
+.sidebar .wikilink1 {
+    font-size: 0.8rem;
+}
+
+.sidebar .wikilink2 {
+    font-size: 0.7rem;
+}
+
+.sidebar .change-log {
+    font-size: 0.7rem;
+}
+
+.mobile-menu ul {
+    margin: 0;
 }

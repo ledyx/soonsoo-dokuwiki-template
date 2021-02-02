@@ -38,6 +38,12 @@ function _optionalWithQuerySelectorAll(dom, selector, then) {
     _optionalWithIterable(dom.querySelectorAll(selector), then);
 }
 
+function toggleNavbarBurger(navbarBurger) {
+    navbarBurger.classList.toggle('is-active');
+    const $target = document.getElementById(navbarBurger.dataset.target);
+    $target.classList.toggle('is-active');
+}
+
 function toggleMobileMenu(id, isShow) {
     const classList = document.getElementById(id).classList;
     const hasHidden = classList.contains('is-hidden');
@@ -45,6 +51,7 @@ function toggleMobileMenu(id, isShow) {
     if (isShow) {
         if (hasHidden) {
             classList.remove("is-hidden");
+            _optionalIdElement("navbar-burger", navbarBurger => toggleNavbarBurger(navbarBurger));
         }
     }
     else {
@@ -79,15 +86,12 @@ function styleCommons(dom) {
         });
 
 
-    _optionalWithClassNameIterable(dom, 'level2',
-        (label, _index) => {
-            label.classList.add('content');
-        });
-
-    _optionalWithClassNameIterable(dom, 'level3',
-        (label, _index) => {
-            label.classList.add('content');
-        });
+    for (let i = 1; i <= 5; i++) {
+        _optionalWithClassNameIterable(dom, 'level' + i,
+            (label, _index) => {
+                label.classList.add('content');
+            });
+    }
 }
 
 function styleSearchForm() {
@@ -153,7 +157,7 @@ function styleConfigForm() {
         });
 }
 
-function setMobileStyle() {
+function setMobileLinkConfig() {
     _optionalWithIterable(document.getElementsByClassName("mobile-menu"),
         mobileMenu => {
             _optionalWithIterable(mobileMenu.getElementsByTagName('a'),
@@ -166,23 +170,16 @@ function setMobileStyle() {
         });
 }
 
+function scrollTop() {
+    console.log("test!");
+    window.scrollTop = '0';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    _optionalIdElement("navbar-burger", navbarBurger =>
+        navbarBurger.addEventListener('click',
+            () => toggleNavbarBurger(navbarBurger)));
 
-    if ($navbarBurgers.length > 0) {
-
-        $navbarBurgers.forEach(el => {
-            el.addEventListener('click', () => {
-
-                const target = el.dataset.target;
-                const $target = document.getElementById(target);
-
-                el.classList.toggle('is-active');
-                $target.classList.toggle('is-active');
-
-            });
-        });
-    }
 
     _optionalIdElement("wiki-content",
         wikiContent => styleCommons(wikiContent));
@@ -192,5 +189,20 @@ document.addEventListener('DOMContentLoaded', () => {
         editButtons => styleEditor(editButtons));
     styleReader();
     styleConfigForm();
-    setMobileStyle();
+    setMobileLinkConfig();
+
+    _optionalWithQuerySelectorAll(document, ".sidebar .level1 .li",
+        li => {
+            const matched = li.innerHTML.match(/(<a[^>]+>[^<]+<\/a>)(.+)/i);
+            if (matched) {
+                li.innerHTML = matched[1] + " <div class='change-log'>" + matched[2] + "</div>";
+            }
+        });
+
+    _optionalIdElement("scroll-top-button", scrollTopButton => {
+        scrollTopButton.addEventListener("click", _ => {
+            console.log("test");
+            document.getElementById("wiki-content").scrollTop = 0;
+        });
+    });
 });

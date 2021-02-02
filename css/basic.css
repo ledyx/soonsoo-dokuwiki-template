@@ -77,6 +77,7 @@ h6 {
 textarea {
     width: 100%;
     min-height: 30rem;
+    padding: 5px;
 }
 
 .editbutton_section {
@@ -125,6 +126,12 @@ legend {
     overflow-y: auto;
 }
 
+.scrollable-mobile {
+    max-height: calc(100vh - 7rem);
+    overflow-x: hidden;
+    overflow-y: auto !important;
+}
+
 .mobile-menu {
     position: fixed;
     top: 0;
@@ -133,12 +140,6 @@ legend {
     z-index: 999;
     width: 100%;
     height: 100%;
-}
-
-.scrollable-mobile {
-    max-height: calc(100vh - 7rem);
-    overflow-x: hidden;
-    overflow-y: auto !important;
 }
 
 .mobile-menu-close {
@@ -210,45 +211,12 @@ legend {
 :target::before {
     content: "";
     display: block;
-    height: 3rem; /* fixed header height*/
-    margin: -3rem 0 0; /* negative fixed header height */
-}
-
-.sidebar .toggle, #mobile-sidebar .toggle {
-    visibility: collapse !important;
-    font-size: 0 !important;
-}
-
-.sidebar .content, #mobile-sidebar .content {
-    margin-top: 1.25rem;
-}
-
-.sidebar ul {
-    margin: 0 0 0 0.5rem;
-}
-
-.mobile-menu ul {
-    margin: 0;
-}
-
-.sidebar li, #mobile-sidebar li {
-    list-style: none;
-}
-
-.sidebar h1, #mobile-sidebar h1 {
-    font-size: 1.25rem !important;
-}
-
-.sidebar .wikilink1, #mobile-sidebar .wikilink1 {
-    font-size: 0.8rem;
-}
-
-.sidebar .wikilink2, #mobile-sidebar .wikilink2 {
-    font-size: 0.7rem;
+    height: 3rem;
+    margin: -3rem 0 0;
 }
 
 .content-start {
-    border-top: 1px solid #f1f1f1
+    border-top: 1px solid #f1f1f1;
 }
 
 .menu-container {
@@ -256,3 +224,10 @@ legend {
     border-right: 1px solid #f1f1f1;
 }
 
+/* .float-menu {
+    position: sticky;
+    width: 100%;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+} */

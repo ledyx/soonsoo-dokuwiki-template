@@ -3,6 +3,15 @@
 if (!defined('DOKU_INC')) die();
 ?>
 
+<?php
+$hasSidebar = page_findnearest($conf['sidebar']);
+// $showSidebar = $hasSidebar && ($ACT == 'show');
+
+ob_start();
+tpl_toc();
+$toc_buffer = ob_get_clean();
+?>
+
 <!-- ********** HEADER ********** -->
 <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
@@ -13,11 +22,11 @@ if (!defined('DOKU_INC')) die();
             $logo = tpl_getMediaFile(array(':wiki:logo.png', ':logo.png', 'images/logo.png'), false, $logoSize);
 
             // display logo and wiki title in a link to the home page
-            echo '<img src="' . $logo . '" class="mr-2" alt="" /> <span>' . $conf['title'] . '</span>';
+            echo '<img src="' . $logo . '" class="mr-2" alt="" /> <span class="subtitle">' . $conf['title'] . '</span>';
             ?>
         </a>
 
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
+        <a role="button" id="navbar-burger" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -33,6 +42,44 @@ if (!defined('DOKU_INC')) die();
         </div>
 
         <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="columns is-vcentered is-mobile mt-1">
+                    <div class="column is-2 has-text-left is-hidden-desktop">
+                        <?php if ($hasSidebar) : ?>
+                            <button class="button" onclick="toggleMobileMenu('mobile-sidebar', true)">
+                                <i class="fas fa-sitemap"></i>
+                            </button>
+                        <?php endif; ?>
+                    </div>
+                    <div class="column">
+                        <div class="buttons is-centered">
+                            <?php
+                            $page_menus = (new \dokuwiki\Menu\PageMenu())->getItems();
+                            foreach ($page_menus as $page_menu) {
+                                if ($page_menu->getLink() == '#dokuwiki__top') {
+                                    echo '<a class="button is-white is-small" id="scroll-top-button">'
+                                    . '<i class="mr-2">' . inlineSVG($page_menu->getSvg()) . '</i></a>';
+                                }
+                                else {
+                                    echo '<a class="button is-white is-small" href="' . $page_menu->getLink() . '">'
+                                    . '<i class="mr-2">' . inlineSVG($page_menu->getSvg()) . '</i></a>';
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <div class="column is-2 has-text-right is-hidden-tablet">
+                        <?php
+                        if (strlen($toc_buffer) > 0) :
+                        ?>
+                            <button class="button" onclick="toggleMobileMenu('mobile-toc', true)">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
                     <?php echo $lang['site_tools']; ?>
