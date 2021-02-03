@@ -80,14 +80,22 @@ $toc_buffer = ob_get_clean();
                 </div>
             </div>
 
+
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
-                    <?php echo $lang['site_tools']; ?>
+                    <?php
+                        if (!empty($_SERVER['REMOTE_USER'])) {
+                            ob_start();
+                            tpl_userinfo();
+                            $value = ob_get_contents();
+                            ob_end_clean();
+                            echo str_replace('Logged in as: ', '', $value);
+                        }
+                    ?>
                 </a>
 
-                <div class="navbar-dropdown">
+                <div class="navbar-dropdown is-right">
                     <?php
-                    // echo (new \dokuwiki\Menu\SiteMenu())->getItems('action ', false);
                     $site_menus = (new \dokuwiki\Menu\SiteMenu())->getItems('action ', false);
                     foreach ($site_menus as $site_menu) {
                         echo '<a class="navbar-item" href="' . $site_menu->getLink() . '">'
@@ -96,44 +104,22 @@ $toc_buffer = ob_get_clean();
                             . '</a>';
                     }
                     ?>
+
+                    <hr class="navbar-divider">
+
+                    <?php
+                    $user_menus = (new \dokuwiki\Menu\UserMenu())->getItems();
+                    foreach ($user_menus as $user_menu) {
+                        echo '<a class="navbar-item" href="' . $user_menu->getLink() . '">'
+                            . '<i class="mr-2">' . inlineSVG($user_menu->getSvg()) . '</i>'
+                            . '<span>' . $user_menu->getLabel() . '</span>'
+                            . '</a>';
+                    }
+                    ?>
+
+
                 </div>
             </div>
-
-            <?php if (empty($_SERVER['REMOTE_USER'])) { ?>
-                <div class="navbar-item">
-                    <a href="<?php echo wl($ID) . "&do=login&amp;sectok=" ?>" class="button">
-                        <i class="fas fa-sign-in-alt mr-2"></i>
-                        <span>Log in</span>
-                    </a>
-                </div>
-            <?php } else { ?>
-
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        <?php
-                        ob_start();
-                        tpl_userinfo();
-                        $value = ob_get_contents();
-                        ob_end_clean();
-                        echo str_replace('Logged in as: ', '', $value);
-                        ?>
-                    </a>
-
-                    <div class="navbar-dropdown is-right">
-                        <?php
-                        $user_menus = (new \dokuwiki\Menu\UserMenu())->getItems();
-                        foreach ($user_menus as $user_menu) {
-                            echo '<a class="navbar-item" href="' . $user_menu->getLink() . '">'
-                                . '<i class="mr-2">' . inlineSVG($user_menu->getSvg()) . '</i>'
-                                . '<span>' . $user_menu->getLabel() . '</span>'
-                                . '</a>';
-                        }
-                        ?>
-                    </div>
-                </div>
-
-            <?php } ?>
-
 
         </div>
     </div>

@@ -61,7 +61,7 @@ function toggleMobileMenu(id, isShow) {
     }
 }
 
-function styleCommons(dom) {
+function decorateCommonStyle(dom) {
     _optionalWithTagNameIterable(dom, 'input',
         (input, _index) => {
             const inputClass = input.type.toLowerCase() == 'checkbox' ? 'checkbox' : 'input';
@@ -72,13 +72,6 @@ function styleCommons(dom) {
         (button, _index) => {
             button.classList.add('button');
         });
-
-
-    _optionalWithTagNameIterable(dom, 'button',
-        (button, _index) => {
-            button.classList.add('button');
-        });
-
 
     _optionalWithTagNameIterable(dom, 'label',
         (label, _index) => {
@@ -94,7 +87,7 @@ function styleCommons(dom) {
     }
 }
 
-function styleSearchForm() {
+function decorateSearchFormStyle() {
     const searchFormContainer = document.querySelector("form#dw__search").getElementsByClassName("no")[0];
     searchFormContainer.classList.add("field");
     searchFormContainer.classList.add("has-addons");
@@ -121,7 +114,7 @@ function styleEditor(editButtons) {
         });
 }
 
-function styleReader() {
+function decorateReaderStyle() {
     _optionalWithClassNameIterable(document, 'btn_secedit',
         (buttonForm, _index) => {
             buttonForm.classList.remove('button');
@@ -132,7 +125,7 @@ function styleReader() {
         });
 }
 
-function styleConfigForm() {
+function decorateConfigFormStyle() {
     _optionalIdElement("dw__configform",
         dw__configform => {
             const selectWrappers = dw__configform.querySelectorAll("div.input");
@@ -170,8 +163,90 @@ function setMobileLinkConfig() {
         });
 }
 
+function decorateSubmitButtons() {
+    _optionalWithQuerySelectorAll(document, "#dw__login button, #acl_manager button",
+        button => {
+            const buttonClassList = button.classList;
+            buttonClassList.add("is-fullwidth");
+            buttonClassList.add("is-link");
+            buttonClassList.add("mt-1");
+        });
+
+
+    _optionalWithQuerySelectorAll(document, "#dw__register button, #dw__configform button",
+        button => {
+            const buttonClassList = button.classList;
+            buttonClassList.add("is-fullwidth");
+            buttonClassList.add("mt-1");
+            if (button.getAttribute('type') == 'submit') {
+                buttonClassList.add("is-link");
+            }
+        });
+
+    _optionalWithQuerySelectorAll(document, "#dw__profiledelete button",
+        button => {
+            button.classList.add("is-fullwidth");
+            button.classList.add("is-danger");
+        });
+
+    _optionalWithQuerySelectorAll(document, "#extension__manager button",
+        button => {
+            const buttonClassList = button.classList;
+
+            if (buttonClassList.contains('uninstall')) {
+                buttonClassList.add("is-danger");
+            }
+            else if (buttonClassList.contains('reinstall')
+                || ['Search', 'Install'].some(title => button.getAttribute('title') == title)) {
+                buttonClassList.add("is-info");
+            }
+            else if (buttonClassList.contains('enable')) {
+                buttonClassList.add("is-link");
+            }
+
+            buttonClassList.add("is-fullwidth");
+        });
+
+    _optionalWithQuerySelectorAll(document, "#plugin__styling button",
+        button => {
+            const buttonClassList = button.classList;
+            if (button.getAttribute("name") == "run[save]") {
+                buttonClassList.add("is-link");
+            }
+
+            buttonClassList.add("is-fullwidth");
+            buttonClassList.add("mt-1");
+        });
+
+
+    _optionalWithQuerySelectorAll(document, "#user__manager button",
+        button => {
+            const buttonClassList = button.classList;
+            const buttonName = button.getAttribute('name');
+
+            if (buttonName == 'fn[delete]') {
+                buttonClassList.add("is-danger");
+            }
+            else if (buttonName == 'fn[export]') {
+                buttonClassList.add("is-info");
+                buttonClassList.add("ml-1");
+            }
+            else if (['fn[add]', 'fn[import]'].some(n => buttonName == n)) {
+                buttonClassList.add("is-fullwidth");
+                buttonClassList.add("is-link");
+            }
+        });
+}
+
+function decorateAdditionalPlugins() {
+    _optionalWithQuerySelectorAll(document, "#config__manager div[class='input']",
+        div => {
+            div.classList.remove('input');
+            div.classList.add('control');
+        });
+}
+
 function scrollTop() {
-    console.log("test!");
     window.scrollTop = '0';
 }
 
@@ -182,13 +257,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     _optionalIdElement("wiki-content",
-        wikiContent => styleCommons(wikiContent));
+        wikiContent => decorateCommonStyle(wikiContent));
 
-    styleSearchForm();
+    decorateSearchFormStyle();
     _optional(document.getElementsByClassName("editButtons")[0],
         editButtons => styleEditor(editButtons));
-    styleReader();
-    styleConfigForm();
+    decorateReaderStyle();
+    decorateConfigFormStyle();
     setMobileLinkConfig();
 
     _optionalWithQuerySelectorAll(document, ".sidebar .level1 .li",
@@ -201,8 +276,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     _optionalIdElement("scroll-top-button", scrollTopButton => {
         scrollTopButton.addEventListener("click", _ => {
-            console.log("test");
             document.getElementById("wiki-content").scrollTop = 0;
         });
     });
+
+    _optionalIdElement("acl__tree",
+        acl__detail => {
+            acl__detail.classList.add("scrollable");
+            /* _optionalWithQuerySelectorAll(acl__detail, "li",
+                li => {
+                    li.style.margin = '0';
+                }); */
+        });
+
+    decorateSubmitButtons();
+    decorateAdditionalPlugins();
 });

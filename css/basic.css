@@ -108,6 +108,7 @@ legend {
 
 .scrollable::-webkit-scrollbar {
     width: 7px;
+    height: 7px;
 }
 
 .scrollable::-webkit-scrollbar-thumb {
@@ -222,6 +223,22 @@ legend {
 .menu-container {
     border-left: 1px solid #f1f1f1;
     border-right: 1px solid #f1f1f1;
+}
+
+.navbar-divider {
+    display: block !important;
+}
+
+#acl__tree, #acl__detail {
+    height: 600px !important;
+}
+
+#acl__tree {
+    word-break: break-all;
+}
+
+#acl__tree li, #mediamanager__page li {
+    margin: 3px 0 3px 0;
 }
 
 /* .float-menu {
