@@ -65,3 +65,9 @@
 .mobile-menu ul {
     margin: 0;
 }
+
+/* Edit Table */
+
+.editbutton_table {
+    margin-top: 2rem;
+}
