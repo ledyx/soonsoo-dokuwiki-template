@@ -65,7 +65,7 @@ $toc_buffer = ob_get_clean();
     if (strlen($toc_buffer) > 0) :
     ?>
         <div class="column is-hidden-mobile scrollable scrollable-desktop menu-container">
-            <div>
+            <div id="desktop-toc">
                 <?php tpl_toc(); ?>
             </div>
         </div>

@@ -21,29 +21,32 @@ p {
 
 h1 {
     font-size: 2.5rem !important;
+    margin-top: 1.5rem;
 }
 
 h2 {
     font-size: 2.25rem !important;
+    margin-top: 1.4rem;
 }
 
 h3 {
     font-size: 2rem !important;
+    margin-top: 1.3rem;
 }
 
 h4 {
     font-size: 1.75rem !important;
-    margin-top: 2rem !important;
+    margin-top: 1.2rem;
 }
 
 h5 {
     font-size: 1.5rem !important;
-    margin-top: 2rem !important;
+    margin-top: 1.1rem;
 }
 
 h6 {
     font-size: 1.25rem !important;
-    margin-top: 2rem !important;
+    margin-top: 1rem;
 }
 
 .breadcrumbs .trace {
@@ -102,8 +105,22 @@ legend {
     font-size: 0.85rem !important;
 }
 
+#dw__toc .toc ul {
+    margin-left: 0.7rem;
+}
+
 #dw__toc .toggle {
-    visibility: collapse;
+    visibility: collapse !important;
+    height: 0;
+    font-size: 0;
+}
+
+#wiki-content .content {
+    margin-bottom: 0 !important;
+}
+
+.section_highlight {
+    background-color: #f7f7f7;
 }
 
 .scrollable::-webkit-scrollbar {
@@ -212,8 +229,8 @@ legend {
 :target::before {
     content: "";
     display: block;
-    height: 3rem;
-    margin: -3rem 0 0;
+    height: 1rem;
+    margin: -1rem 0 0;
 }
 
 .content-start {

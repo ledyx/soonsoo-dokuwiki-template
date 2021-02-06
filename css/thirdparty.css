@@ -1,7 +1,7 @@
 /* tag */
 
 .tags {
-    margin: 15px 0 15px 0;
+    margin: 15px 0 15px 0 !important;
 }
   
 .tags a {
@@ -38,10 +38,7 @@
 .sidebar .toggle {
     visibility: collapse !important;
     font-size: 0 !important;
-}
-
-.sidebar .content {
-    margin-top: 1.25rem;
+    height: 0 !important;
 }
 
 .sidebar li {
@@ -50,6 +47,7 @@
 
 .sidebar h1 {
     font-size: 1.25rem !important;
+    margin: 0 !important;
 }
 
 .sidebar .wikilink1 {

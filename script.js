@@ -250,6 +250,21 @@ function scrollTop() {
     window.scrollTop = '0';
 }
 
+function binearySearch(arr, x, start, end) {
+    if (start > end)
+        return end;
+
+    let mid = Math.floor((start + end) / 2);
+
+    if (arr[mid] === x)
+        return mid;
+
+    if (arr[mid] > x)
+        return binearySearch(arr, x, start, mid - 1);
+    else
+        return binearySearch(arr, x, mid + 1, end);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     _optionalIdElement("navbar-burger", navbarBurger =>
         navbarBurger.addEventListener('click',
@@ -283,10 +298,6 @@ document.addEventListener('DOMContentLoaded', () => {
     _optionalIdElement("acl__tree",
         acl__detail => {
             acl__detail.classList.add("scrollable");
-            /* _optionalWithQuerySelectorAll(acl__detail, "li",
-                li => {
-                    li.style.margin = '0';
-                }); */
         });
 
     decorateSubmitButtons();
