@@ -214,7 +214,7 @@ legend {
 }
 
 #media__manager {
-    margin: 0 10px 0 10px;
+    margin: 1rem;
 }
 
 #media__manager h1 {
@@ -256,6 +256,55 @@ legend {
 
 #acl__tree li, #mediamanager__page li {
     margin: 3px 0 3px 0;
+}
+
+.media img {
+    height: 1rem;
+    margin-right: 5px;
+}
+
+.media a {
+    text-decoration: none;   
+}
+
+.media .li {
+    display: inline;
+}
+
+.media li {
+    margin: 0.5rem 0 0.5rem 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#mediamgr__content .even {
+    margin: 1rem 0 1rem 0;
+}
+
+#mediamgr__content {
+    overflow-y: auto;
+    max-height: 50vh;
+}
+
+#mediamanager__page img {
+    width: auto;
+}
+
+#mediamanager__page dl {
+    margin: 0.5rem 0 0.5rem 0;
+}
+
+.panelContent {
+    overflow-y: auto !important;
+    height: 50vh !important;
+}
+
+.panel.file {
+    display: inline;
+}
+
+.panel.file .select::after {
+    visibility: hidden;
 }
 
 /* .float-menu {

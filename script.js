@@ -85,6 +85,15 @@ function decorateCommonStyle(dom) {
                 label.classList.add('content');
             });
     }
+
+    _optionalWithClassNameIterable(dom, "tagstop",
+        (_div, _index) => {
+            _optionalWithTagNameIterable(_div, "span",
+            (_span, _index) => {
+                _span.innerHTML = _span.innerHTML.replaceAll(',', '');
+                _span.innerHTML = _span.innerHTML.replace(/\n\t/g, '');
+            });
+        });
 }
 
 function decorateSearchFormStyle() {

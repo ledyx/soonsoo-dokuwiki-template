@@ -1,10 +1,10 @@
 /* tag */
 
-.tags {
+.tags, .tagstop {
     margin: 15px 0 15px 0 !important;
 }
   
-.tags a {
+.tags a, .tagstop a {
     background-color: #00d1b2;
     color: white;
     border-radius: 5px;
@@ -70,4 +70,21 @@
 
 .editbutton_table {
     margin-top: 2rem;
+}
+
+/* .mermaid {
+    text-align: center;
+} */
+
+.mermaid .title {
+    font-size: 0.8rem !important;
+}
+
+/* code */
+
+.code-toolbar .token.number {
+    font-size: 0.85rem !important;
+    margin-right: 0 !important;
+    min-width: 0rem !important;
+    padding: 0 !important;
 }

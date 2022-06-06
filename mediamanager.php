@@ -18,6 +18,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
         [<?php echo strip_tags($conf['title'])?>]
     </title>
     <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+    <link href="<?php echo tpl_basedir(); ?>assets/css/bulma.min.css" rel="stylesheet">
     <?php tpl_metaheaders()?>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
@@ -25,7 +26,8 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 </head>
 
 <body>
-    <div id="media__manager" class="dokuwiki">
+    <!-- <div id="media__manager" class="dokuwiki"> -->
+    <div id="media__manager">
         <?php html_msgarea() ?>
         <div id="mediamgr__aside"><div class="pad">
             <h1><?php echo hsc($lang['mediaselect'])?></h1>
@@ -36,7 +38,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
             <?php tpl_mediaTree() ?>
         </div></div>
 
-        <div id="mediamgr__content"><div class="pad">
+        <div id="mediamgr__content" class="scrollable"><div class="pad">
             <?php tpl_mediaContent() ?>
         </div></div>
     </div>
