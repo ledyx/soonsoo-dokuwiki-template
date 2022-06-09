@@ -311,4 +311,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     decorateSubmitButtons();
     decorateAdditionalPlugins();
+
+    // Set centered forms at "Login"
+    const params = window.location.href.split("?");
+    if (params.slice(1).filter(param => param.includes("do=login")).length > 0) {
+        _optionalWithTagNameIterable(dom, 'input',
+            (input, _index) => {
+                if (input.classList.contains("edit")) {
+                    input.classList.add("has-text-centered");
+                }
+            });
+    }
 });
