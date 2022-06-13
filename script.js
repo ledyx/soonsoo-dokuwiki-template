@@ -89,10 +89,10 @@ function decorateCommonStyle(dom) {
     _optionalWithClassNameIterable(dom, "tagstop",
         (_div, _index) => {
             _optionalWithTagNameIterable(_div, "span",
-                (_span, _index) => {
-                    _span.innerHTML = _span.innerHTML.replaceAll(',', '');
-                    _span.innerHTML = _span.innerHTML.replace(/\n\t/g, '');
-                });
+            (_span, _index) => {
+                _span.innerHTML = _span.innerHTML.replaceAll(',', '');
+                _span.innerHTML = _span.innerHTML.replace(/\n\t/g, '');
+            });
         });
 }
 
@@ -279,22 +279,8 @@ document.addEventListener('DOMContentLoaded', () => {
         navbarBurger.addEventListener('click',
             () => toggleNavbarBurger(navbarBurger)));
 
-
     _optionalIdElement("wiki-content",
-        wikiContent => {
-            decorateCommonStyle(wikiContent);
-
-            // Set centered forms at "Login"
-            const params = window.location.href.split("?");
-            if (params.slice(1).filter(param => param.includes("do=login")).length > 0) {
-                _optionalWithTagNameIterable(wikiContent, 'input',
-                    (input, _index) => {
-                        if (input.classList.contains("edit")) {
-                            input.classList.add("has-text-centered");
-                        }
-                    });
-            }
-        });
+        wikiContent => decorateCommonStyle(wikiContent));
 
     decorateSearchFormStyle();
     _optional(document.getElementsByClassName("editButtons")[0],
@@ -324,4 +310,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     decorateSubmitButtons();
     decorateAdditionalPlugins();
+
+    // Set centered forms at "Login"
+    _optionalIdElement("dw__login",
+        dw__login => _optionalWithTagNameIterable(dw__login, 'input',
+        (input, _index) => {
+            if (input.classList.contains("edit")) {
+                input.classList.add("has-text-centered");
+            }
+        }));
 });
