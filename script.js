@@ -94,6 +94,12 @@ function decorateCommonStyle(dom) {
                 _span.innerHTML = _span.innerHTML.replace(/\n\t/g, '');
             });
         });
+
+    // Center the mermaid diragram
+    _optionalWithClassNameIterable(dom, "mermaid",
+        (mermaid, _index) => {
+            mermaid.classList.add("has-text-centered");
+        });
 }
 
 function decorateSearchFormStyle() {
